@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 file_path = os.path.abspath(os.getcwd()) + '/list.txt'
 
-@app.route("/")
+@app.route('/')
 def index():
 	with open(file_path, 'r') as file:
 		list = file.read().splitlines()
