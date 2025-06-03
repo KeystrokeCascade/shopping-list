@@ -4,6 +4,9 @@ import os
 app = Flask(__name__)
 file_path = os.path.abspath(os.getcwd()) + '/list.txt'
 
+if not os.path.isfile(file_path):
+	open(file_path, 'a').close()
+
 @app.route('/')
 def index():
 	with open(file_path, 'r') as file:
