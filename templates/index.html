@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>shopping-list</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename='icon.ico') }}">
+	</head>
+	<body>
+		<ul>
+		{%- for item in list %}
+			<li>
+				<form action="{{ url_for('remove') }}" method="POST">
+					<input type="submit" value="-" class="button">
+					<label>{{ item }}</label>
+					<input type="hidden" name="item" value="{{ item }}">
+				</form>
+			</li>
+		{%- endfor %}
+		</ul>
+		<form action="{{ url_for('add') }}" method="POST">
+            <input type="text" name="item" autocomplete="off" autofocus>
+            <input type="submit" value="+" class="button">
+        </form>
+	</body>
+</html>
