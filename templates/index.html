@@ -7,6 +7,8 @@
 
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 		<link rel="shortcut icon" type="image/ico" href="{{ url_for('static', filename='icon.ico') }}">
+
+		<script>0</script>
 	</head>
 	<body>
 		<h1>
@@ -16,7 +18,7 @@
 		{%- for item in list %}
 			<li>
 				<form action="{{ url_for('remove') }}" method="POST">
-					<input type="submit" value="-" class="button">
+					<button><span>-</span></button>
 					<label>{{ item }}</label>
 					<input type="hidden" name="item" value="{{ item }}">
 				</form>
@@ -24,7 +26,7 @@
 		{%- endfor %}
 		</ul>
 		<form action="{{ url_for('add') }}" method="POST">
-			<input type="submit" value="+" class="button">
+			<button><span>+</span></button>
             <input type="text" name="item" autocomplete="off" autofocus>
         </form>
 	</body>
