@@ -4,6 +4,7 @@ import os
 app = Flask(__name__)
 file_path = os.path.abspath(os.getcwd()) + '/list.txt'
 
+# Create file if it doesn't exist
 if not os.path.isfile(file_path):
 	open(file_path, 'a').close()
 
@@ -25,8 +26,11 @@ def remove():
 	item = request.form['item']
 	with open(file_path, 'r+') as file:
 		list = file.read().splitlines()
-		list.remove(item)
-		file.seek(0)
-		file.writelines([item + '\n' for item in list])
-		file.truncate()
+		try:
+			list.remove(item)
+			file.seek(0) # No easy way to read then overwrite file
+			file.writelines([item + '\n' for item in list])
+			file.truncate()
+		except ValueError: # Don't crash trying to delete already deleted thing
+			pass
 	return redirect(url_for('index'))
