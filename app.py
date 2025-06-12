@@ -34,3 +34,7 @@ def remove():
 		except ValueError: # Don't crash trying to delete already deleted thing
 			pass
 	return redirect(url_for('index'))
+
+@app.errorhandler(404)
+def page_not_found(error):
+	return redirect(url_for('index'))
